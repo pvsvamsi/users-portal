@@ -8,11 +8,6 @@
     color: white
 }
 
-.navbar-header a:hover {
-    background-color: transparent;
-    color: white;
-}
-
 .navbar-brand{
     cursor: default;
 }
