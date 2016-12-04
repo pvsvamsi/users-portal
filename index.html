@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>Users Portal</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="thirdparty/bootstrap.min.css">
+    <link rel="stylesheet" href="thirdparty/font-awesome.min.css">
+    <link rel="stylesheet" href="app.css">
+    <script type='text/javascript' src='thirdparty/jquery-min.js'></script>
+    <script src="thirdparty/angular-min.js"></script>
+    <script src="thirdparty/angular-route-min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body ng-app="UsersApp" ng-controller="mainController">
+<nav class="navbar customNavbar">
+    <div class="navbar-header">
+        <a class="navbar-brand text" href="#/">Users portal</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#/" class="text" ng-class="{'tabSelected': $route.current.activetab == 'home'}">Home</a></li>
+            <li><a href="#/userslist" class="text" ng-class="{'tabSelected': $route.current.activetab == 'listing'}">User Database</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <div class="content">
+        <div ng-view></div>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+.customNavbar {
+    margin: 0 0 20px 0;
+    background-color: #0D47A1;
+    border: none !important;
+}
+
+.text {
+    color: white
+}
+
+.navbar-header a:hover {
+    background-color: transparent;
+    color: white;
+}
+
+.navbar-brand{
+    cursor: default;
+}
+
+.navbar-nav a:hover {
+    background-color: #2e93ff !important;
+    color: black !important;
+}
+
+.tabSelected, a:focus {
+    background-color: white !important;
+    color: #0D47A1 !important;
+}
+
+.formDiv {
+    width: 50%;
+    padding: 30px;
+    margin: 0 auto;
+    border: .2rem solid #f7f7f9;
+    border-radius: 5px;
+    box-shadow: 5px 5px 20px #888888;
+}
+
+.content {
+    margin-bottom: 20px;
+}
+
+.successMessage{
+    position: fixed;
+    display: flex;
+    bottom: 20px;
+    right: 10px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+}

@@ -1,0 +1,80 @@
+<div class="formDiv">
+    <form name="userForm" ng-submit="submitForm()" novalidate>
+
+        <div class="form-group"
+             ng-class="{ 'has-error' : userForm.firstName.$invalid && !userForm.firstName.$pristine && showError }">
+            <label>First Name</label>
+            <input type="text" name="firstName" class="form-control" ng-model="user.firstName"
+                   ng-blur="showError=true" ng-focus="showError=false" required>
+            <p ng-show="userForm.firstName.$invalid && !userForm.firstName.$pristine && showError"
+               class="help-block">This is a required field</p>
+        </div>
+
+        <div class="form-group"
+             ng-class="{ 'has-error' : userForm.lastName.$invalid && !userForm.lastName.$pristine && showError }">
+            <label>Last Name</label>
+            <input type="text" name="lastName" class="form-control" ng-model="user.lastName"
+                   ng-blur="showError=true" ng-focus="showError=false" required>
+            <p ng-show="userForm.nalastNameme.$invalid && !userForm.lastName.$pristine && showError"
+               class="help-block">This is a required field</p>
+        </div>
+
+        <div class="form-group"
+             ng-class="{ 'has-error' : userForm.dob.$invalid && !userForm.dob.$pristine && showError }">
+            <label>Date of Birth</label>
+            <input type="date" name="dob" class="form-control" ng-model="user.dob" placeholder="yyyy-MM-dd"
+                   ng-min="maxDOB" ng-max="today" ng-blur="showError=true" ng-focus="showError=false" required>
+            <p ng-show="userForm.dob.$invalid && !userForm.dob.$pristine && showError" class="help-block">Enter a
+                valid date of birth.</p>
+        </div>
+
+        <div class="form-group"
+             ng-class="{ 'has-error' : userForm.age.$invalid && !userForm.age.$pristine && showError }">
+            <label>Age</label>
+            <input type="number" name="age" class="form-control" ng-model="user.age" ng-min="0" ng-max="100"
+                   ng-blur="showError=true" ng-focus="showError=false" required>
+            <p ng-show="userForm.age.$invalid && !userForm.age.$pristine && showError" class="help-block">Enter a
+                valid age.</p>
+        </div>
+
+        <div class="form-group"
+             ng-class="{ 'has-error' : userForm.sex.$invalid && !userForm.sex.$pristine && showError }">
+            <label>Gender</label>
+            <select type="text" name="sex" class="form-control" ng-model="user.sex" ng-blur="showError=true"
+                    ng-focus="showError=false" required>
+                <option value="">--- Please Select ---</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="others">Other</option>
+            </select>
+            <p ng-show="userForm.age.$invalid && !userForm.age.$pristine && showError" class="help-block">Please
+                select your gender</p>
+        </div>
+
+        <div class="form-group"
+             ng-class="{ 'has-error' : userForm.phoneNum.$invalid && !userForm.phoneNum.$pristine && showError }">
+            <label>Mobile Number</label>
+            <input type="number" name="phoneNum" class="form-control" ng-model="user.phoneNum" ng-maxlength="10"
+                   ng-minlength="10" ng-blur="showError=true" ng-focus="showError=false" required>
+            <p ng-show="userForm.phoneNum.$invalid && !userForm.phoneNum.$pristine && showError" class="help-block">
+                Enter a valid mobile number.</p>
+        </div>
+
+        <div class="form-group"
+             ng-class="{ 'has-error' : userForm.notes.$invalid && !userForm.notes.$pristine && showError }">
+            <label>Notes</label>
+            <textarea type="text" name="notes" class="form-control" ng-model="user.notes" ng-blur="showError=true"
+                      ng-focus="showError=false"></textarea>
+            <p ng-show="userForm.notes.$invalid && !userForm.notes.$pristine && showError" class="help-block">Enter
+                a valid notes (This is an optional field).</p>
+        </div>
+
+        <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">Submit</button>
+
+    </form>
+</div>
+
+<div ng-show="submitSuccess" class="successMessage alert alert-success alert-dismissable">
+    <strong>Success!</strong> The user is added to the database.
+    <span class="close" aria-label="close" ng-click="submitSuccess = false">×</span>
+</div>
