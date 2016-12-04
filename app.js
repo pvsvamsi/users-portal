@@ -1,6 +1,6 @@
 var app = angular.module('UsersApp', ['ngRoute']);
 
-app.config(['$routeProvider', function($routeProvider) {
+app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'views/addUser.html',
@@ -17,7 +17,7 @@ app.config(['$routeProvider', function($routeProvider) {
         });
 }]);
 
-app.controller('mainController', function ($scope,$route,commonService) {
+app.controller('mainController', function ($scope, $route, commonService) {
     $scope.$route = $route;
     var users = [];
     if (typeof(Storage) !== "undefined") {
@@ -38,16 +38,16 @@ app.controller('mainController', function ($scope,$route,commonService) {
 app.service('commonService', function () {
     var isLocalStorageSupported = true;
     var users = [];
-    this.setUsers = function(usersArr){
+    this.setUsers = function (usersArr) {
         users = usersArr;
     };
-    this.getUsers = function(){
+    this.getUsers = function () {
         return angular.copy(users);
     };
-    this.setIsLocalStorageSupported = function(flag){
+    this.setIsLocalStorageSupported = function (flag) {
         isLocalStorageSupported = flag;
     };
-    this.getIsLocalStorageSupported = function(){
+    this.getIsLocalStorageSupported = function () {
         return angular.copy(isLocalStorageSupported);
     };
 });
@@ -69,26 +69,40 @@ app.controller('userController', function ($scope, $timeout, commonService) {
     $scope.maxDOB = (year - 100) + '-' + month + '-' + date;
 
     $scope.submitForm = function () {
-        users.push($scope.user);
-        if (commonService.getIsLocalStorageSupported()) {
-            localStorage.setItem("users", JSON.stringify(users));
+        if (!isAgeCorrect()) {
+            $scope.userForm.age.$invalid = true;
+        } else {
+            users.push($scope.user);
+            if (commonService.getIsLocalStorageSupported()) {
+                localStorage.setItem("users", JSON.stringify(users));
+            }
+            commonService.setUsers(users);
+            $scope.submitSuccess = true;
+            $timeout(function () {
+                $scope.submitSuccess = false;
+            }, 5000);
+            resetForm();
         }
-        commonService.setUsers(users);
-        $scope.submitSuccess = true;
-        $timeout(function(){
-            $scope.submitSuccess = false;
-        }, 5000);
-        resetForm();
     };
 
-    var resetForm = function(){
+    var resetForm = function () {
         $scope.showError = false;
         $scope.user = {};
         $scope.userForm.$setPristine();
-    }
+    };
+
+    var isAgeCorrect = function () {
+        var birthDate = new Date($scope.user.dob);
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && date < birthDate.getDate())) {
+            age--;
+        }
+        return age === $scope.user.age;
+    };
 });
 
-app.controller('listingController', function ($scope,$route, commonService) {
+app.controller('listingController', function ($scope, $route, commonService) {
     $scope.$route = $route;
     $scope.users = commonService.getUsers();
     $scope.searchText = '';
